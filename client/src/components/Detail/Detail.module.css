@@ -1,0 +1,25 @@
+.contenedor{
+    display: flex;
+    }
+    
+    .izquierda {
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    height: 100vh;
+    }
+    .izquierda h3 {
+        margin-top: 6%;
+    }
+    
+    .derecha {
+        margin-top: 12%;
+        width: 50%;   
+    }
+    
+    .derecha img {
+        max-width: fit-content;
+        margin: auto 5% auto 5% ;
+        width: 90%;          
+    }
+    

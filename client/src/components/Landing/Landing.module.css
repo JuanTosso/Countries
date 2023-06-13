@@ -1,0 +1,56 @@
+body {
+    background-image: url('https://cdn.pixabay.com/photo/2017/10/23/05/56/summer-2880261_1280.jpg');
+    background-size: cover;
+    background-repeat: repeat;
+    height: 100vh;
+     }
+.contenedor {
+    position: relative; 
+    height: 30em;
+}
+.tittle {
+   
+    color:rgb(225, 196, 196);
+    background-color: rgb(72, 144, 172,0.7);
+    padding: 0.5em;
+    width: fit-content;
+    margin: auto  ;
+   
+}
+
+.button {
+    position: absolute; 
+    bottom: 0;
+    left: 42%;
+    right: 42%;
+    margin: auto;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+  .button:hover {
+    border-color: #646cff;
+  }
+  .button:focus,
+  .button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+  
+  @media (prefers-color-scheme: light) {
+    :root {
+      color: #213547;
+      background-color: #ffffff;
+    }
+    a:hover {
+      color: #747bff;
+    }
+    button {
+      background-color: #f9f9f9;
+    }
+  }

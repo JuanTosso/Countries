@@ -1,0 +1,7 @@
+.form {
+    color: white;
+    background-color: rgba(165, 165, 165, 0.9);
+    width: fit-content;
+    margin: auto;
+    padding: 1em;
+}

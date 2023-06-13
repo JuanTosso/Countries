@@ -1,0 +1,26 @@
+.contenedor{
+    background-color: #f2fc38;
+    width: 18%;
+    
+    margin: auto;
+    margin-bottom: 1em;
+    border: none;
+    border-radius: 10px;
+   
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.3s ease-in-out;
+    
+}
+.contenedor:hover {
+    box-shadow: 0 0 10px #f79d00;
+}
+
+.contenedor img {
+    width: 100%;
+    min-width: 5em;
+    border-radius: 5px 5px 5px 5px;
+    
+}

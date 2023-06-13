@@ -1,0 +1,16 @@
+.home {
+    color: red;
+}
+.selectores {
+    display: flex;
+    margin: auto 5% auto 5%;
+}
+
+.ordenadores {
+    overflow-wrap: break-word;
+    width: 25%;
+    margin-left: 5%;
+    margin-right: 5%;
+    justify-content: space-around;
+    background-color: rgb(161, 182, 221,0.6);
+}
