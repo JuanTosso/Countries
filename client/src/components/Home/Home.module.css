@@ -1,16 +1,82 @@
 .home {
-    color: red;
+  position: relative;
 }
-.selectores {
-    display: flex;
-    margin: auto 5% auto 5%;
+.home nav {
+  background-color: rgb(255, 255, 255, 0.1);
+  height: 2.5em;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home nav button {
+  margin-left: 1em;
+}
+.input {
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 7px;
+  font-size: 16px;
+  font-family: inherit;
+}
+.create {
+  position: absolute;
+  top: 0.8em;
+  right: 2em;
+  width: fit-content;
+}
+.backNext {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto auto auto;
+  width: fit-content;
+}
+.backNext button {
+  margin-right: 1em;
 }
 
-.ordenadores {
-    overflow-wrap: break-word;
-    width: 25%;
-    margin-left: 5%;
-    margin-right: 5%;
-    justify-content: space-around;
-    background-color: rgb(161, 182, 221,0.6);
+.selectores {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1em 3.5em;
+}
+
+.order_filter {
+  overflow-wrap: break-word;
+  font-size: 12px;
+  background-color: rgb(103, 58, 37);
+  border-radius: 10px;
+  border: none;
+  width: 17em;
+  padding: 0.5em;
+}
+.order_filter h4 {
+  color: rgb(199, 172, 126);
+  margin: 0.1em;
+}
+.order_filter select {
+  background-color: rgb(199, 182, 165, 0.6);
+  border: 2px solid;
+  border-color: rgb(103, 58, 37);
+  color: rgb(84, 48, 32);
+  margin-top: 0.4em;
+  border-radius: 5px;
+  padding: 0.2em;
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out;
+}
+.order_filter select:focus {
+  outline: none;
+  box-shadow: 0 0 6px rgb(199, 182, 165, 0.6);
+  border: 2px solid;
+  border-color: rgb(119, 68, 35);
+}
+
+.order_filter option {
+  background-color: rgb(199, 172, 126);
+}
+.order_filter option:hover {
+  background-color: rgb(199, 182, 165, 0.6);
 }

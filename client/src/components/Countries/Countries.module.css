@@ -1,9 +1,6 @@
 .contenedor {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1em 1em;
-    justify-content: space-around;
-    
-
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1em 2.5em 0.4em 2.5em;
+  justify-content: space-around;
 }
-/* Probar hacerlo con grid! */

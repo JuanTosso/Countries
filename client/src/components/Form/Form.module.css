@@ -1,7 +1,76 @@
+.principal {
+  position: relative;
+  background-color: rgb(199, 172, 126, 0.3);
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.principal a {
+  position: absolute;
+  left: 3em;
+  top: 1em;
+}
 .form {
-    color: white;
-    background-color: rgba(165, 165, 165, 0.9);
-    width: fit-content;
-    margin: auto;
-    padding: 1em;
+  border: none;
+  background-color: rgb(103, 58, 37);
+  width: 50%;
+  margin: 2em auto auto auto;
+  padding: 2em;
+  border-radius: 1em;
+}
+.fieldset {
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+  grid-template-rows: auto auto;
+  column-gap: 1em;
+}
+.inputs {
+  margin-bottom: 20px;
+}
+
+.form label {
+  font-weight: bold;
+  margin: auto 1em 1em auto;
+  text-align: left;
+  color: rgb(199, 172, 126);
+  font-size: 15px;
+}
+
+.inputs input {
+  border: none;
+  padding: 0.5em;
+  border-radius: 5px;
+  margin-left: 1em;
+  min-width: 20em;
+  background-color: rgb(199, 182, 165, 0.6);
+}
+.inputs select {
+  border: none;
+  padding: 0.5em;
+  border-radius: 5px;
+  /* color: rgb(199, 172, 126); */
+  background-color: rgb(199, 182, 165, 0.6);
+}
+.countries_selected p {
+  font-size: 11px;
+  text-align: justify;
+  color: rgb(199, 172, 126);
+}
+.error {
+  font-size: 10px;
+  height: 20px;
+  overflow: hidden;
+  text-align: left;
+  margin: 0 auto 0 2em;
+  font-style: italic;
+}
+
+.error p {
+  color: red;
+}
+button.disable {
+  opacity: 0.5; /* Por ejemplo, reduce la opacidad del botón */
+  cursor: not-allowed;
 }
