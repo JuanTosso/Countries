@@ -4,14 +4,11 @@ const { conn } = require("./src/db.js");
 const PORT = 3001;
 const { Country } = require("./src/db.js");
 
-//aca es el mejor lugar para importar el modelo y cargar la base de datos:
-// const {Country} = require('./src/db')
-
 conn
   .sync({ force: false }) // el force en true, dropea la bs al volver a levantar el servidor
   .then(() => {
     server.listen(PORT, async () => {
-      const dataBase = Country.findAll();
+      const dataBase = await Country.findAll();
 
       if (!dataBase.length) {
         const { data } = await axios("http://localhost:5000/countries");
@@ -32,13 +29,9 @@ conn
             population: country.population,
           };
         });
-        for (let i = 0; i < mappedData.length; i++) {
-          await Country.findOrCreate({
-            where: { name: mappedData[i].name },
-            defaults: mappedData[i],
-          });
-        }
-        //  await Country.bulkCreate(mappedData)
+
+        await Country.bulkCreate(mappedData);
+
         console.log("DT loaded");
       }
 

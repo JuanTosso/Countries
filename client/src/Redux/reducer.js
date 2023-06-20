@@ -8,14 +8,18 @@ import {
   ORDER_POPULATION,
   POST_ACTIVITY,
   GET_ACTIVITIES,
-} from "./actions";
+  NEXT_PAGE,
+  PREVIOUS_PAGE,
+  RESET_PAGE,
+} from "./action-types";
 
 //completar el estado inicial
 const initialState = {
   countries: [],
   countriesAux: [],
-  allCountries: [],
+  allCountries: [], //solo lo uso para el Form
   activities: [],
+  firstToShow: 0,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -47,6 +51,7 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case FILTER_ACTIVITY:
+      //En el payload recibo un "All countries" o un array con los paises que tienen esa actividad
       if (action.payload === "All countries") {
         return { ...state, countries: state.countriesAux };
       } else {
@@ -59,12 +64,12 @@ const rootReducer = (state = initialState, action) => {
         return { ...state, countries: filteredCountries };
       }
 
-    case ORDER_NAME: //Ver bien q hace el metodo localeCompare
+    case ORDER_NAME:
       const actualNameOrder = [...state.countries];
       if (action.payload === "A") {
         actualNameOrder.sort((a, b) => {
           return a.name.localeCompare(b.name);
-        });
+        }); //localeCompare es un metodo de string q me ayuda a comparar dos cadenas de texto para ordenarlas
       } else {
         actualNameOrder.sort((a, b) => {
           return b.name.localeCompare(a.name);
@@ -101,6 +106,25 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         activities: action.payload,
       };
+    case NEXT_PAGE:
+      let aux = state.firstToShow;
+      if (state.firstToShow + 10 >= state.countries.length)
+        aux = state.firstToShow;
+      else aux += 10;
+      return {
+        ...state,
+        firstToShow: aux,
+      };
+    case PREVIOUS_PAGE:
+      let first = state.firstToShow;
+      if (first < 10) first = state.firstToShow;
+      else first -= 10;
+      return {
+        ...state,
+        firstToShow: first,
+      };
+    case RESET_PAGE:
+      return { ...state, firstToShow: 0 };
 
     default:
       return { ...state };

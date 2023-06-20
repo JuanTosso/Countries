@@ -1,6 +1,8 @@
 const server = require("../src/server");
+
 const session = require("supertest");
 const agent = session(server); //agent es nuestra promesa para testear esta ruta
+
 const getCountryById = require("../src/controllers/getCountryById");
 
 describe("GET /countries/:idPais", () => {
@@ -22,6 +24,6 @@ describe("GET /countries/:idPais", () => {
     expect(response).toHaveProperty("population");
   });
   it("Responde status 404 si no encuentra el Id en la base de datos", async () => {
-    await agent.get("/countries/ZZZZ").expect(404);
+    await agent.get("/countries/ZZZ").expect(404);
   });
 });

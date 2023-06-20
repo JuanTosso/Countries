@@ -1,10 +1,11 @@
 const server = require("../src/server");
+
 const session = require("supertest");
 const agent = session(server); //agent es nuestra promesa para testear esta ruta
+
 const getAllCountries = require("../src/controllers/getAllCountries");
 
 //que es y para que sirve supertest
-//
 
 describe("GET /countries", () => {
   it("Es una funcion", () => {

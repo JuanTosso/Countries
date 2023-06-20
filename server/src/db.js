@@ -1,9 +1,9 @@
 require("dotenv").config();
-const { Sequelize } = require("sequelize");
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
+const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`,
@@ -37,8 +37,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { Country, Activity } = sequelize.models;
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
+// Relaciones:
 Country.belongsToMany(Activity, { through: "country_activity" });
 Activity.belongsToMany(Country, { through: "country_activity" });
 

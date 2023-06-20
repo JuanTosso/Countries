@@ -1,9 +1,11 @@
 import style from "./Form.module.css";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postActivity } from "../../Redux/actions";
-import validate from "../../Functions/validation";
 import { Link } from "react-router-dom";
+//Actions:
+import { postActivity } from "../../Redux/actions";
+//Valicaciones:
+import validate from "../../Functions/validation";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ const Form = () => {
   });
 
   // hook de react para crear una referencia al formulario y poder resetearlo
-  const formReset = useRef(null);
+  const formReset = useRef();
 
   //Estado local para manejar los errores
   const [error, setError] = useState({});
@@ -44,7 +46,7 @@ const Form = () => {
     //metodo para crear un array, a partir de un objeto iterable.
     const selectedCountries = Array.from(
       event.target.selectedOptions,
-      (option) => option.value
+      (country) => country.value
     );
     setActivity({
       ...activity,
@@ -91,7 +93,9 @@ const Form = () => {
               onChange={handleOnChange}
               value={activity.name}
             />
-            <p className={style.error}>{error.name && <p>{error.name} </p>}</p>
+            <div className={style.error}>
+              {error.name && <p>{error.name} </p>}
+            </div>
           </div>
 
           <div className={style.inputs}>
@@ -117,9 +121,9 @@ const Form = () => {
               placeholder="hours..."
               onChange={handleOnChange}
             />
-            <p className={style.error}>
+            <div className={style.error}>
               {error.duration && <p>{error.duration} </p>}
-            </p>
+            </div>
           </div>
 
           <div className={style.inputs}>
@@ -184,7 +188,7 @@ const Form = () => {
         >
           Submit
         </button>
-        <p className={style.error}>
+        <div className={style.error}>
           {!activity.name ||
           !activity.season ||
           !activity.difficulty ||
@@ -193,7 +197,7 @@ const Form = () => {
           ) : (
             ""
           )}
-        </p>
+        </div>
       </form>
     </div>
   );

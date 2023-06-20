@@ -1,7 +1,10 @@
 import CountryCard from "../CountryCard/CountryCard";
 import style from "./Countries.module.css";
+import { useSelector } from "react-redux";
 
-const Countries = ({ countries, firstToShow }) => {
+const Countries = () => {
+  const countries = useSelector((state) => state.countries);
+  const firstToShow = useSelector((state) => state.firstToShow);
   return (
     <div className={style.contenedor}>
       {countries

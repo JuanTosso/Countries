@@ -1,21 +1,24 @@
 import style from "./Detail.module.css";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Detail = () => {
+  //Hook de React para recibir el Id de
   const { id } = useParams();
   const [countryDetail, setcountryDetail] = useState([]);
 
   useEffect(() => {
-    axios(`http://localhost:3001/countries/${id}`).then(({ data }) => {
-      data.name ? setcountryDetail(data) : window.alert("No Country Found");
-    });
+    fetch(`http://localhost:3001/countries/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        data.name ? setcountryDetail(data) : window.alert("No Country Found");
+      });
   }, [id]);
 
   const { name, image, continent, capital, subregion, area, population } =
     countryDetail;
+
   const formattedArea = Number(area).toLocaleString("es-ES");
   const formattedPopulation = Number(population).toLocaleString("es-ES");
 
@@ -32,7 +35,6 @@ const Detail = () => {
 
       <div className={style.contenedor}>
         <div className={style.izquierda}>
-          <h3> Id | {id && id}</h3>
           <h3> Continent | {continent && continent}</h3>
           <h3> Capital | {capital && capital}</h3>
           <h3> Subregion | {subregion && subregion}</h3>

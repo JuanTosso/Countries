@@ -2,26 +2,28 @@ import style from "./Home.module.css";
 import Countries from "../Countries/Countries";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+//Acciones:
 import {
   getCountriesByName,
   filterByContinent,
   filterByActivity,
   orderByName,
   orderByPopulation,
+  nextPage,
+  previousPage,
+  resetPage,
 } from "../../Redux/actions";
-import { Link } from "react-router-dom";
 
-const Home = ({ countries }) => {
-  //Estado local, para renderizar actividades en el filtro
+const Home = () => {
+  const dispatch = useDispatch();
+
+  //Estado globales
   const activities = useSelector((state) => state.activities);
-  console.log(activities); //ver si las actividades q agrego con post se renderizan
-  const dispatch = useDispatch(); //para poder despachar acciones
-
-  //Estado Local para manejar el paginado
-  const [firstToShow, setFirstToShow] = useState(0);
 
   //Estado local para manejar la barra de busqueda
   const [countrySearch, setCountrySearch] = useState("");
+
   //manejador de la barra de busqueda
   const handleChange = (event) => {
     setCountrySearch(event.target.value);
@@ -29,37 +31,35 @@ const Home = ({ countries }) => {
   //despacha la accion de la barra de busqueda
   const handleSearch = () => {
     dispatch(getCountriesByName(countrySearch));
-    setFirstToShow(0);
+    dispatch(resetPage());
   };
 
   // manejadores del paginado
   const handlePrevious = () => {
-    if (firstToShow < 10) return;
-    setFirstToShow(firstToShow - 10);
+    dispatch(previousPage());
   };
 
   const handleNext = () => {
-    if (firstToShow + 10 >= countries.length) return;
-    setFirstToShow(firstToShow + 10);
+    dispatch(nextPage());
   };
 
   //Manejadores de ORDEN
   const handleNameOrder = (e) => {
-    setFirstToShow(0);
+    dispatch(resetPage());
     dispatch(orderByName(e.target.value));
   };
   const handlePopulationOrder = (e) => {
-    setFirstToShow(0);
+    dispatch(resetPage());
     dispatch(orderByPopulation(e.target.value));
   };
 
   //Manejadores de los filtros
   const handleContinentFilter = (e) => {
-    setFirstToShow(0);
+    dispatch(resetPage());
     dispatch(filterByContinent(e.target.value));
   };
   const handleActivityFilter = (e) => {
-    setFirstToShow(0);
+    dispatch(resetPage());
     dispatch(filterByActivity(e.target.value));
   };
   return (
@@ -81,18 +81,18 @@ const Home = ({ countries }) => {
 
       <div className={style.selectores}>
         <div className={style.order_filter}>
-          <h4>Ornenar Alfabeticamente</h4>
+          <h4>Sort by name</h4>
           <select name="nameOrder" defaultValue="" onChange={handleNameOrder}>
             <option value="" disabled hidden>
               {" "}
               --Select--
             </option>
-            <option value="A">Ascendente</option>
-            <option value="D">Descendente</option>
+            <option value="A">Ascending</option>
+            <option value="D">Descending</option>
           </select>
         </div>
         <div className={style.order_filter}>
-          <h4>Ornenar por Poblacion</h4>
+          <h4>Sort by population</h4>
           <select
             name="populationOrder"
             defaultValue=""
@@ -102,13 +102,17 @@ const Home = ({ countries }) => {
               {" "}
               --Select--{" "}
             </option>
-            <option value="A">Ascendente</option>
-            <option value="D">Descendente</option>
+            <option value="A">Ascending</option>
+            <option value="D">Descending</option>
           </select>
         </div>
         <div className={style.order_filter}>
-          <h4>Filtrar por Continente</h4>
-          <select name="continentFilter" onChange={handleContinentFilter}>
+          <h4>Filter by Continent</h4>
+          <select
+            name="continentFilter"
+            defaultValue=""
+            onChange={handleContinentFilter}
+          >
             <option value="" disabled hidden>
               {" "}
               --Select--{" "}
@@ -124,8 +128,12 @@ const Home = ({ countries }) => {
           </select>
         </div>
         <div className={style.order_filter}>
-          <h4>Filtrar por Actividad turistica</h4>
-          <select name="activityFilter" onClick={handleActivityFilter}>
+          <h4>Filter by Activity</h4>
+          <select
+            name="activityFilter"
+            defaultValue=""
+            onChange={handleActivityFilter}
+          >
             <option value="" disabled hidden>
               {" "}
               --Select--{" "}
@@ -142,7 +150,7 @@ const Home = ({ countries }) => {
         </div>
       </div>
 
-      <Countries countries={countries} firstToShow={firstToShow} />
+      <Countries />
       <div className={style.backNext}>
         <button onClick={handlePrevious}>Previous</button>
         <button onClick={handleNext}>Next</button>

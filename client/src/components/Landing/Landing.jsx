@@ -28,7 +28,7 @@ const Landing = () => {
         únicas en cada rincón del globo!
       </p>
       <button className={style.button}>
-        <NavLink to="/home">INGRESAR</NavLink>
+        <NavLink to="/home">GET INTO</NavLink>
       </button>
     </div>
   );

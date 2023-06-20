@@ -1,14 +1,20 @@
 import axios from "axios";
-
 //ActionsName:
-export const GET_COUNTRIES = "GET_COUNTRIES";
-export const GET_COUNTRIES_BY_NAME = "GET_COUNTRIES_BY_NAME ";
-export const FILTER_CONTINENT = "FILTER_CONTINENT";
-export const FILTER_ACTIVITY = "FILTER_ACTIVITY";
-export const ORDER_NAME = "ORDER_NAME";
-export const ORDER_POPULATION = "ORDER_POPULATION";
-export const POST_ACTIVITY = "POST_ACTIVITY";
-export const GET_ACTIVITIES = "GET_ACTIVITIES";
+import {
+  GET_COUNTRIES,
+  GET_COUNTRIES_BY_NAME,
+  FILTER_CONTINENT,
+  FILTER_ACTIVITY,
+  ORDER_NAME,
+  ORDER_POPULATION,
+  POST_ACTIVITY,
+  GET_ACTIVITIES,
+  NEXT_PAGE,
+  PREVIOUS_PAGE,
+  RESET_PAGE,
+} from "./action-types";
+
+//Actions:
 
 export const getCountries = () => {
   return async (dispatch) => {
@@ -101,5 +107,22 @@ export const postActivity = (activity) => {
     } catch (error) {
       console.log(error.message);
     }
+  };
+};
+
+export const nextPage = () => {
+  return {
+    type: NEXT_PAGE,
+  };
+};
+export const previousPage = () => {
+  return {
+    type: PREVIOUS_PAGE,
+  };
+};
+
+export const resetPage = () => {
+  return {
+    type: RESET_PAGE,
   };
 };
