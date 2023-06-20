@@ -22,9 +22,13 @@ const Home = () => {
   //Estado globales
   const activities = useSelector((state) => state.activities);
   //manejo de paginado:
+  const firstToShow = useSelector((state) => state.firstToShow);
+
+  const paginaActual = Math.ceil((firstToShow + 1) / 10);
+
   const countries = useSelector((state) => state.countries);
   const pages = Math.ceil(countries.length / 10);
-  const [actualPage, setActualPage] = useState(1);
+
   //Estado local para manejar la barra de busqueda
   const [countrySearch, setCountrySearch] = useState("");
 
@@ -40,39 +44,29 @@ const Home = () => {
 
   // manejadores del paginado
   const handlePrevious = () => {
-    if (actualPage > 1) {
-      setActualPage(actualPage - 1);
-    }
     dispatch(previousPage());
   };
 
   const handleNext = () => {
-    if (actualPage < pages) {
-      setActualPage(actualPage + 1);
-    }
     dispatch(nextPage());
   };
 
   //Manejadores de ORDEN
   const handleNameOrder = (e) => {
-    setActualPage(1);
     dispatch(resetPage());
     dispatch(orderByName(e.target.value));
   };
   const handlePopulationOrder = (e) => {
-    setActualPage(1);
     dispatch(resetPage());
     dispatch(orderByPopulation(e.target.value));
   };
 
   //Manejadores de los filtros
   const handleContinentFilter = (e) => {
-    setActualPage(1);
     dispatch(resetPage());
     dispatch(filterByContinent(e.target.value));
   };
   const handleActivityFilter = (e) => {
-    setActualPage(1);
     dispatch(resetPage());
     dispatch(filterByActivity(e.target.value));
   };
@@ -169,7 +163,7 @@ const Home = () => {
         <button onClick={handlePrevious}>Previous</button>
         <button onClick={handleNext}>Next</button>
         <p>
-          Page {actualPage} of {pages}
+          Page {paginaActual} of {pages}
         </p>
       </div>
     </div>
