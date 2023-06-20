@@ -5,7 +5,7 @@ const PORT = 3001;
 const { Country } = require("./src/db.js");
 
 conn
-  .sync({ force: false }) // el force en true, dropea la bs al volver a levantar el servidor
+  .sync({ force: true }) // el force en true, dropea la bs al volver a levantar el servidor
   .then(() => {
     server.listen(PORT, async () => {
       const dataBase = await Country.findAll();

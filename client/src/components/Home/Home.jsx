@@ -1,8 +1,9 @@
 import style from "./Home.module.css";
 import Countries from "../Countries/Countries";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 //Acciones:
 import {
   getCountriesByName,
@@ -20,7 +21,10 @@ const Home = () => {
 
   //Estado globales
   const activities = useSelector((state) => state.activities);
-
+  //manejo de paginado:
+  const countries = useSelector((state) => state.countries);
+  const pages = Math.ceil(countries.length / 10);
+  const [actualPage, setActualPage] = useState(1);
   //Estado local para manejar la barra de busqueda
   const [countrySearch, setCountrySearch] = useState("");
 
@@ -36,29 +40,39 @@ const Home = () => {
 
   // manejadores del paginado
   const handlePrevious = () => {
+    if (actualPage > 1) {
+      setActualPage(actualPage - 1);
+    }
     dispatch(previousPage());
   };
 
   const handleNext = () => {
+    if (actualPage < pages) {
+      setActualPage(actualPage + 1);
+    }
     dispatch(nextPage());
   };
 
   //Manejadores de ORDEN
   const handleNameOrder = (e) => {
+    setActualPage(1);
     dispatch(resetPage());
     dispatch(orderByName(e.target.value));
   };
   const handlePopulationOrder = (e) => {
+    setActualPage(1);
     dispatch(resetPage());
     dispatch(orderByPopulation(e.target.value));
   };
 
   //Manejadores de los filtros
   const handleContinentFilter = (e) => {
+    setActualPage(1);
     dispatch(resetPage());
     dispatch(filterByContinent(e.target.value));
   };
   const handleActivityFilter = (e) => {
+    setActualPage(1);
     dispatch(resetPage());
     dispatch(filterByActivity(e.target.value));
   };
@@ -154,6 +168,9 @@ const Home = () => {
       <div className={style.backNext}>
         <button onClick={handlePrevious}>Previous</button>
         <button onClick={handleNext}>Next</button>
+        <p>
+          Page {actualPage} of {pages}
+        </p>
       </div>
     </div>
   );
