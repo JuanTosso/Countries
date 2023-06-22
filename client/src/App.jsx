@@ -7,7 +7,7 @@ import Landing from "./components/Landing/Landing";
 import Home from "./components/Home/Home";
 import Detail from "./components/Detail/Detail";
 import Form from "./components/Form/Form";
-import HomeClass from "./components/Home copy/HomeClass";
+
 //Acciones:
 import { getCountries, getActivities } from "./Redux/actions";
 
@@ -25,7 +25,6 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/homeclass" element={<HomeClass />} />
         <Route path="/home" element={<Home />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/form" element={<Form />} />
