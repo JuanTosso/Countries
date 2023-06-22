@@ -6,12 +6,11 @@ const postActivity = async (req, res) => {
 
     if (countryId.length === 0 || !name || !difficulty || !season)
       throw Error("missing data to add activity");
-
     const newActivity = await Activity.create({
       name,
       difficulty,
       season,
-      duration,
+      duration: duration !== "" ? duration : null,
     });
 
     await newActivity.addCountries(countryId);

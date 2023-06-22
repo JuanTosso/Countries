@@ -9,13 +9,6 @@
   justify-content: center;
   align-items: center;
 }
-.title {
-  position: absolute;
-  top: 0.6em;
-  left: 1em;
-  margin: 0;
-  color: #f1f1f1;
-}
 .home nav button {
   margin-left: 1em;
 }

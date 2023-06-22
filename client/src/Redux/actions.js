@@ -29,6 +29,7 @@ export const getCountries = () => {
     }
   };
 };
+
 export const getActivities = () => {
   return async (dispatch) => {
     try {
@@ -44,20 +45,20 @@ export const getActivities = () => {
 };
 
 export const getCountriesByName = (name) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(
-        `http://localhost:3001/countries/name?name=${name}`
-      );
-      return dispatch({
-        type: GET_COUNTRIES_BY_NAME,
-        payload: data,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
+  return (dispatch) => {
+    fetch(`http://localhost:3001/countries/name?name=${name}`)
+      .then((response) => response.json())
+      .then((data) =>
+        dispatch({
+          type: GET_COUNTRIES_BY_NAME,
+          payload: data,
+        })
+      )
+
+      .catch((error) => console.log(error.message));
   };
 };
+
 export const filterByContinent = (continent) => {
   return {
     type: FILTER_CONTINENT,
@@ -93,6 +94,7 @@ export const orderByPopulation = (order) => {
     payload: order,
   };
 };
+
 export const postActivity = (activity) => {
   return async (dispatch) => {
     try {

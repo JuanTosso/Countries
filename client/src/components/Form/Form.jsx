@@ -85,7 +85,7 @@ const Form = () => {
       <form className={style.form} onSubmit={handleSubmit} ref={formReset}>
         <div className={style.fieldset}>
           <div className={style.inputs}>
-            <label id="name">Name</label>
+            <label id="name">Name (*)</label>
             <input
               type="text"
               name="name"
@@ -99,7 +99,7 @@ const Form = () => {
           </div>
 
           <div className={style.inputs}>
-            <label id="difficulty">Difficulty</label>
+            <label id="difficulty">Difficulty (*)</label>
             <select defaultValue="" onClick={handleOnChange} name="difficulty">
               <option value="" disabled hidden>
                 {" "}
@@ -127,7 +127,7 @@ const Form = () => {
           </div>
 
           <div className={style.inputs}>
-            <label id="season">Season</label>
+            <label id="season">Season (*)</label>
             <select defaultValue="" onChange={handleOnChange} name="season">
               <option value="" disabled hidden>
                 --Select--
@@ -140,7 +140,7 @@ const Form = () => {
           </div>
 
           <div className={style.inputs}>
-            <label id="countryId">Countries </label>
+            <label id="countryId">Countries (*) </label>
             <select onChange={handleCountriesChange} name="countryId" multiple>
               {orderedCountries?.map(({ id, name }) => {
                 return (
@@ -152,7 +152,7 @@ const Form = () => {
             </select>
           </div>
           <div className={style.countries_selected}>
-            <label id="countriesSelected">Countries selected:</label>
+            <label id="countriesSelected">Selected countries:</label>
             {activity.countryId.length > 0 ? (
               <p>
                 {orderedCountries.map((country) => {
@@ -162,12 +162,16 @@ const Form = () => {
                 })}
               </p>
             ) : (
-              <p>No Countries selected</p>
+              <div>
+                <p>No Countries selected</p>
+                <p>Press Ctrl for multiple selection</p>
+              </div>
             )}
           </div>
         </div>
         <button
           disabled={
+            activity.name &&
             activity.season &&
             activity.difficulty &&
             !error.name &&
@@ -177,6 +181,7 @@ const Form = () => {
               : true
           }
           className={
+            activity.name &&
             activity.season &&
             activity.difficulty &&
             !error.name &&
@@ -193,7 +198,7 @@ const Form = () => {
           !activity.season ||
           !activity.difficulty ||
           !activity.countryId.length ? (
-            <p>* All fields must be completed</p>
+            <p>(*)You must complete all required fields</p>
           ) : (
             ""
           )}

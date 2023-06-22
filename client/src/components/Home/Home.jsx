@@ -1,7 +1,7 @@
 import style from "./Home.module.css";
 import Countries from "../Countries/Countries";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 //Acciones:
@@ -21,17 +21,19 @@ const Home = () => {
 
   //Estado globales
   const activities = useSelector((state) => state.activities);
+
   //manejo de paginado:
   const firstToShow = useSelector((state) => state.firstToShow);
-
-  const paginaActual = Math.ceil((firstToShow + 1) / 10);
-
   const countries = useSelector((state) => state.countries);
+
+  const paginaActual =
+    countries.length === 0 ? 0 : Math.ceil((firstToShow + 1) / 10);
+
   const pages = Math.ceil(countries.length / 10);
 
   //Estado local para manejar la barra de busqueda
   const [countrySearch, setCountrySearch] = useState("");
-
+  const [searchError, setSearchError] = useState("");
   //manejador de la barra de busqueda
   const handleChange = (event) => {
     setCountrySearch(event.target.value);
@@ -40,6 +42,7 @@ const Home = () => {
   const handleSearch = () => {
     dispatch(getCountriesByName(countrySearch));
     dispatch(resetPage());
+    setSearchError(countrySearch);
   };
 
   // manejadores del paginado
@@ -73,6 +76,9 @@ const Home = () => {
   return (
     <div className={style.home}>
       <nav>
+        <Link to={"/"}>
+          <h1 className={style.title}>GlobeTrek</h1>
+        </Link>
         <input
           className={style.input}
           name="search"
@@ -158,7 +164,7 @@ const Home = () => {
         </div>
       </div>
 
-      <Countries />
+      <Countries searchError={searchError} />
       <div className={style.backNext}>
         <button onClick={handlePrevious}>Previous</button>
         <button onClick={handleNext}>Next</button>

@@ -46,7 +46,7 @@ const Detail = () => {
         </div>
 
         <div className={style.derecha}>
-          <img src={image && image} alt="" />
+          <img src={image && image} alt={name} />
         </div>
       </div>
     </div>
