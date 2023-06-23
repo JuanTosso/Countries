@@ -1,11 +1,12 @@
 const { Activity } = require("../db");
 
 const postActivity = async (req, res) => {
+  const { countryId, name, difficulty, duration, season } = req.body;
   try {
-    const { countryId, name, difficulty, duration, season } = req.body;
+    if (countryId.length === 0 || !name || !difficulty || !season) {
+      return res.status(404).json({ error: "Missing data to add activity" });
+    }
 
-    if (countryId.length === 0 || !name || !difficulty || !season)
-      throw Error("missing data to add activity");
     const newActivity = await Activity.create({
       name,
       difficulty,
@@ -17,7 +18,7 @@ const postActivity = async (req, res) => {
 
     return res.status(200).json(newActivity);
   } catch (error) {
-    res.status(404).json(error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
