@@ -102,12 +102,13 @@ export const postActivity = (activity) => {
         `http://localhost:3001/activities`,
         activity
       );
+      window.alert("Activity created");
       return dispatch({
         type: POST_ACTIVITY,
         payload: data,
       });
     } catch (error) {
-      console.log(error.message);
+      window.alert(error.response.data.error);
     }
   };
 };

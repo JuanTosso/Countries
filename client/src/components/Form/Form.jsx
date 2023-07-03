@@ -71,8 +71,6 @@ const Form = () => {
 
     //Al hacer submit, reseteo el formulario, utilizando el hook:
     formReset.current.reset();
-
-    window.alert("Activity created");
   };
 
   return (
