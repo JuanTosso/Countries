@@ -76,6 +76,7 @@ const Home = () => {
   return (
     <div className={style.home}>
       <nav>
+        <h1>Cambios varios</h1>
         <Link to={"/"}>
           <h1 className={style.title}>GlobeTrek</h1>
         </Link>
